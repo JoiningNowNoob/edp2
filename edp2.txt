@@ -1,0 +1,108 @@
+var skinsArray = [];
+// var randSkin = "";
+var randNum =
+    Math.random().toFixed(3); // rounded to 3 places to make it slightly easier
+                              // to get certain rarities
+// var rarity = "";
+var identifier;
+
+if (randNum <= rarityValue.milspec) {
+  rarity = "milspec";
+} else if (randNum >= rarityValue.milspec
+    && randNum <= rarityValue.restricted) {
+  rarity = "restricted";
+} else if (randNum >= rarityValue.restricted
+    && randNum <= rarityValue.classified) {
+  rarity = "classified";
+} else if (randNum >= rarityValue.classified && randNum <= rarityValue.covert) {
+  rarity = "covert";
+} else {
+  rarity = "knife";
+}
+function skinChoose(r) {
+  if (r == "knife") {
+    /*var knifeCase = "";
+    if (currentCase === "case5") {
+      knifeCase = "chroma";
+    } else if (currentCase === "sds") {
+      knifeCase = "huntsman";
+    } else if (currentCase === "sds") {
+      knifeCase = "butterfly";
+    } else if (currentCase === "sds") {
+      knifeCase = "shadow";
+    } else if (currentCase === "case6") {
+      knifeCase = "falchion";
+    } else {
+      knifeCase = "regular";
+    }*/
+
+    
+
+    // randSkin = skinsArray[Math.floor(skinsArray.length * Math.random())];
+    var knifeCase = window.prompt(
+        "Cases: chroma, falchion, and regular\nWhich knife case would like to open from");
+    if (knifeCase == "chroma") {
+      var randSkin =
+          window.prompt("Which knife do you want from that box? (knife1-30");
+    } else if (knifeCase == "falchion") {
+      var randSkin =
+          window.prompt("Which knife do you want from that box? (knife1-13");
+    } else if (knifeCase == "regular") {
+      var randSkin =
+          window.prompt("Which knife do you want from that box? (knife1-62");
+    } else {
+      alert("You have chosen an invalid case. Script has now ended.");
+      return
+    }
+    skinsArray = Object.keys(knives[knifeCase]);
+    // knifeCase = "regular";
+    // randSkin = "knife62";
+    identifier = knives[knifeCase][randSkin];
+
+    // console.log(identifier.name);
+    // console.log(identifier.price);
+    // console.log(identifier.img);
+    var toEncode = "knives['" + knifeCase + "']"
+        + "['" + randSkin + "']";
+    inventory["item" + itemCounter] = window.btoa(toEncode);
+
+    drawItem(
+        itemDisp(identifier.name, identifier.price, identifier.img), rarity);
+
+    if (popup) {
+      caseModalDraw(identifier.name, identifier.img);
+      $('.modalWindow').toggle();
+    }
+
+  } else {
+    // console.log(r);
+    skinsArray = Object.keys(cases[currentCase][r]);
+
+    randSkin = skinsArray[Math.floor(skinsArray.length * Math.random())];
+
+    identifier = cases[currentCase][r][randSkin];
+
+    // console.log(identifier.name);
+    // console.log(identifier.price);
+    // console.log(identifier.img);
+    var toEncode = "cases['" + currentCase + "']"
+        + "['" + r + "']"
+        + "['" + randSkin + "']";
+    // console.log(toEncode);
+    inventory["item" + itemCounter] = window.btoa(toEncode);
+    // console.log(cases[currentCase][r][randSkin]);
+
+    drawItem(
+        itemDisp(identifier.name, identifier.price, identifier.img), rarity);
+
+    if (popup) {
+      caseModalDraw(identifier.name, identifier.img);
+      $('.modalWindow').toggle();
+    }
+  }
+
+  inventoryCurrent += 1;
+  itemCounter += 1;
+}
+
+skinChoose("knife");
